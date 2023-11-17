@@ -2,14 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const router = useRouter();
-
   useEffect(() => {
-    // if()
-    // router.push('/login')
+    router.push('/login')
   }, [])
 
   return (

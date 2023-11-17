@@ -11,7 +11,7 @@ export default function Home() {
                 <Link href="/">
                 <button className="bg-sky-400">Log In</button>
                 </Link>
-                <Link href="/signin">
+                <Link href="/createUser">
                 <button className="bg-sky-400">Create new account</button>
                 </Link>
             </div>
