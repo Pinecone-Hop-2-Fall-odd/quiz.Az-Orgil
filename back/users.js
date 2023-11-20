@@ -56,4 +56,25 @@ router.get("/user", (request, response) => {
             });
         });
 });
+
+router.get("/user/:username", (request, response) => {
+    const { username } = request.params
+
+    fs.readFile("./data/user.json", "utf-8",
+        (readError, data) => {
+            let savedData = JSON.parse(data);
+            if (readError) {
+                response.json({
+                    status: "read file error",
+                });
+            }
+            const oneUser = savedData.filter((userData) => userData.username === username)
+            if (oneUser.length === 1) {
+                response.sendStatus(200);
+            } else {
+                response.sendStatus(404);
+
+            }
+        });
+});
 module.exports = router
