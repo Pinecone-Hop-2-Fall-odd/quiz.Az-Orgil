@@ -36,7 +36,7 @@ router.post("/user", (request, response) => {
                     });
                 }
             }
-        ); console.log(savedData);
+        );
 
 
     });
@@ -57,8 +57,8 @@ router.get("/user", (request, response) => {
         });
 });
 
-router.get("/user/:username", (request, response) => {
-    const { username } = request.params
+router.post("/login", (request, response) => {
+    const { username, password } = request.body
 
     fs.readFile("./data/user.json", "utf-8",
         (readError, data) => {
@@ -69,11 +69,15 @@ router.get("/user/:username", (request, response) => {
                 });
             }
             const oneUser = savedData.filter((userData) => userData.username === username)
-            if (oneUser.length === 1) {
-                response.sendStatus(200);
+            if (oneUser.length === 0) {
+                response.status(403).json({ message: "User not found" });
             } else {
-                response.sendStatus(404);
-
+                if (oneUser[0].pass === password) {
+                    response.status(200).json({ user: oneUser[0] });
+                }
+                else {
+                    response.status(403).json({ message: "Password not right" });
+                }
             }
         });
 });

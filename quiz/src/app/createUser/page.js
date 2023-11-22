@@ -2,44 +2,31 @@
 import axios from "axios";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
     const [userName , setUserName] = useState("")
     const [pass,setPass] = useState("")
+    const router = useRouter()
     const url = 'http://localhost:8080/user'
-    // const [users, setUsers] = useState([]);
-
-    // sigin, signup
-    // login, createUser
-
     async function handleSubmit(e) {
-        console.log(e)
         e.preventDefault()
         const data = {
             username: userName,
             pass: pass
         }
 
-
-        const fetched_data = await axios({
-            method: "POST",
-            url: url,
-            data: data,
-        })
+        if(userName && pass){
+            const fetched_data = await axios({
+                method: "POST",
+                url: url,
+                data: data,
+            })
+            if(fetched_data.status === 200) {
+                router.push('/login')
+            }
+        }
     };
-
-    // async function fetchAllData() {
-    //     const fetched_data = await fetch(url);
-    //     console.log(fetched_data)
-    //     const FETCHED_JSON = await
-    //         fetched_data.json();
-    //     setUsers(FETCHED_JSON.data);
-    // };
-
-    // useEffect(() => {
-    //     fetchAllData();
-    // }, []);
-
     return (
         <div style={{ backgroundImage: "url(background.png)" }} className="w-screen h-screen flex justify-center items-center">
             <div style={{ border: "solid 1px black", width: "300px", height: "400px" }} className="bg-gray-300 flex justify-center items-center flex-col gap-[30px]">

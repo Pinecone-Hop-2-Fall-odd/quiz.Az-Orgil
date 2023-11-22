@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const PORT = 8080
 const app = express()
-const userRouter = require("./users")
+const userRouter = require("./routes/users")
 
 app.use(cors())
 app.use(express.json())

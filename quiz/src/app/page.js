@@ -5,9 +5,13 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+
   const router = useRouter();
   useEffect(() => {
-    router.push('/login')
+    const userId = localStorage.getItem('userId');
+    if(!userId) {
+      router.push('/login')
+    }
   }, [])
 
   return (
