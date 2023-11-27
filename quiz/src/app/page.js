@@ -15,11 +15,11 @@ export default function Home() {
   }, [])
 
   return (
-    <div style={{backgroundImage:"url(background.png)"}} className="h-screen w-screen">
+    <div style={{backgroundImage:"url(background.png)"}} className="h-screen w-screen flex justify-center">
       <div className="flex justify-center items-center flex-col">
         <img src="game.png" className="w-[250px]" />
         <Link href="/Logo">
-          <button className="bg-gray-300">Start</button>
+          <button className="bg-gray-300 w-[250px] rounded">Start</button>
         </Link>
       </div>
     </div>
