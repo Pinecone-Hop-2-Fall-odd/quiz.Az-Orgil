@@ -28,7 +28,7 @@ export default function Home() {
         }
     };
     return (
-        <div style={{ backgroundImage: "url(background.png)" }} className="w-screen h-screen flex justify-center items-center">
+        <div style={{ backgroundImage: "url(too.jpeg)" }} className="w-screen h-screen flex justify-center items-center">
             <div style={{ border: "solid 1px black", width: "300px", height: "400px" }} className="bg-gray-300 flex justify-center items-center flex-col gap-[30px]">
                 <h1>create</h1>
                 <form onSubmit={(e) =>  handleSubmit(e)} className="flex justify-center items-center flex-col gap-[30px]">

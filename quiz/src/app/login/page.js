@@ -22,7 +22,7 @@ export default function Home() {
         })
     }
     return (
-        <div style={{ backgroundImage: "url(background.png)" }} className="h-screen w-screen flex justify-center items-center">
+        <div style={{ backgroundImage: "url(too.jpeg)" }} className="h-screen w-screen flex justify-center items-center">
             <div style={{ border: "solid 1px black", width: "300px", height: "400px" }} className="bg-gray-300 flex justify-center items-center flex-col gap-[30px]">
                 <h1>Log Into Logo game</h1>
                 <input value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="username/id" />
