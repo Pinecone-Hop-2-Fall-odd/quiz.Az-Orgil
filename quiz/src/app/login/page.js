@@ -12,13 +12,13 @@ export default function Home() {
         await axios.post(`http://localhost:8080/login`, { username: userName, password: pass }).then((response) => {
             if (response.status === 200) {
                 console.log(response.data.user)
-                localStorage.setItem("userId", response.data.user._id)
+                localStorage.setItem("token", response.data.token)
                router.push("/")
             } else {
                 alert("Username or the password is wrong")
             }
         }).catch((error) => {
-            alert("Username or the password is wrong")
+            alert("Username or the password is wrong hello")
         })
     }
     return (

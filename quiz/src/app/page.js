@@ -8,8 +8,8 @@ export default function Home() {
 
   const router = useRouter();
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    if(!userId) {
+    const token = localStorage.getItem('token');
+    if(!token) {
       router.push('/login')
     }
   }, [])
