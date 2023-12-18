@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken"
 export const router = express.Router();
 router.post("/user", async (request, response) => {
     const body = request.body
-    console.log(typeof body.pass, body.pass)
     const hashedpassword = await bcrypt.hash(body.pass || "", 10);
     await UserModel.create({
         username: body.username,

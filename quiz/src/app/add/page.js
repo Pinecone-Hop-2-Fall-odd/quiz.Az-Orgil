@@ -3,7 +3,6 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
 export default function Home() {
   const [question, setQuestion] = useState("")
   const [ans1, setAns1] = useState("")
@@ -11,21 +10,25 @@ export default function Home() {
   const [ans3, setAns3] = useState("")
   const [ans4, setAns4] = useState("")
   const router = useRouter()
-  const url = 'http://localhost:8080/user'
+  const url = 'http://localhost:8080/question'
   async function handleSubmit(e) {
     e.preventDefault()
     const data = {
-      question: question,
-      ans1: ans1,
-      ans2: ans2,
-      ans3: ans3,
-      ans4: ans4,
+      question: question.toString(),
+      ans1: ans1.toString(),
+      ans2: ans2.toString(),
+      ans3: ans3.toString(),
+      ans4: ans4.toString(),
     }
       const fetched_data = await axios({
         method: "POST",
         url: url,
         data: data,
       })
+      if(fetched_data.status === 200){
+        console.log("yes")
+        window.location.reload(false);
+      }
   };
   return (
     <form onSubmit={(e) =>  handleSubmit(e)}>
