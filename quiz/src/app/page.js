@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Header } from "../../components/header";
 
 export default function Home() {
 
   const router = useRouter();
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if(!token) {
       router.push('/login')
     }

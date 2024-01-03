@@ -12,7 +12,7 @@ export default function Home() {
         await axios.post(`http://localhost:8080/login`, { username: userName, password: pass }).then((response) => {
             if (response.status === 200) {
                 console.log(response.data.user)
-                sessionStorage.setItem("token", response.data.token)
+                localStorage.setItem("token", response.data.token)
                router.push("/")
             } else {
                 alert("Username or the password is wrong")

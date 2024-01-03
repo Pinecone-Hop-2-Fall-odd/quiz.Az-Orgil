@@ -1,10 +1,12 @@
 import mongoose from 'mongoose';
 const questionSchema = new mongoose.Schema({
     question: String,
-    ans1: String,
-    ans2: String,
-    ans3: String,
-    ans4: String
+    answers: [
+        {
+            ans: String,
+            isCorrect: Boolean
+        },
+    ]
 })
 
 export const QuestionModel = mongoose.model("question", questionSchema)
