@@ -1,15 +1,11 @@
 "use client";
 
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 export default function Home() {
-  const [isCorrect,setIsCorrect]=useState()
-  const [question, setQuestion] = useState("")
-  const [ans1, setAns1] = useState("")
-  const [ans2, setAns2] = useState("")
-  const [ans3, setAns3] = useState("")
-  const [ans4, setAns4] = useState("")
+  const [quiz, setQuiz] = useState({})
   const router = useRouter();
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -21,23 +17,23 @@ export default function Home() {
   async function handleSubmit(e) {
     e.preventDefault()
     const data = {
-      question: question.toString(),
+      question: quiz[5].question.toString(),
       answers: [
         {
-          ans: ans1.toString(),
-          isCorrect: false
+          answer: quiz[0].answer.toString(),
+          isCorrect:quiz[0].isCorrect
         },
         {
-          ans: ans2.toString(),
-          isCorrect: false
+          answer: quiz[1].answer.toString(),
+          isCorrect:quiz[1].isCorrect
         },
         {
-          ans: ans3.toString(),
-          isCorrect: false
+          answer: quiz[2].answer.toString(),
+          isCorrect:quiz[2].isCorrect
         },
         {
-          ans: ans4.toString(),
-          isCorrect: false
+          answer: quiz[3].answer.toString(),
+          isCorrect:quiz[3].isCorrect
         },
       ]
     }
@@ -50,33 +46,49 @@ export default function Home() {
       console.log("yes")
       window.location.reload(false);
     }
+    if(quiz.isCorrect===""){
+      alert("")
+    }
   };
-  const correct =()=>{
-  setIsCorrect(true)
+
+  function handleCheck(index) {
+    setQuiz(prev => ({ ...prev, [index]: { ...prev[index], isCorrect: true } }))
   }
+  function handleAnswer(index, value) {
+    setQuiz(prev => ({ ...prev, [index]: { ...prev[index], answer: value } }))
+  }
+  function handleQuestion(index, value) {
+    setQuiz(prev => ({ ...prev, [index]: { ...prev[index], question: value } }))
+  }
+  console.log("quiz", quiz)
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <div style={{ backgroundImage: "url(too.jpeg)" }} className="h-screen w-screen flex justify-center items-center flex-col gap-[300px]" >
-        <input className="h-[100px]" style={{ border: "1px solid black" }} name="question" placeholder="q" value={question} onChange={(e) => setQuestion(e.target.value)} />
+        <input className="h-[100px]" style={{ border: "1px solid black" }} name="question" placeholder="q" onChange={(e) => handleQuestion(5, e.target.value)} />
         <div className="gap-[50px] flex flex-col flex-wrap h-[100px]">
           <div>
-            <input type="checkbox" onClick={correct}/>
-            <input name="ans1" placeholder="ans" value={ans1} onChange={(e) => setAns1(e.target.value)} />
+            <input type="checkbox" onClick={(e) => handleCheck(0)} />
+            <input name="ans1" placeholder="ans" onChange={(e) => handleAnswer(0, e.target.value)} />
           </div>
           <div>
-            <input type="checkbox" onClick={correct}/>
-            <input name="ans2" placeholder="ans" value={ans2} onChange={(e) => setAns2(e.target.value)} />
+            <input type="checkbox" onClick={(e) => handleCheck(1)} />
+            <input name="ans2" placeholder="ans" onChange={(e) => handleAnswer(1, e.target.value)} />
           </div>
           <div>
-            <input type="checkbox" onClick={correct}/>
-            <input name="ans3" placeholder="ans" value={ans3} onChange={(e) => setAns3(e.target.value)} />
+            <input type="checkbox" onClick={(e) => handleCheck(2)} />
+            <input name="ans3" placeholder="ans" onChange={(e) => handleAnswer(2, e.target.value)} />
           </div>
           <div>
-            <input type="checkbox" onClick={correct}/>
-            <input name="ans4" placeholder="ans" value={ans4} onChange={(e) => setAns4(e.target.value)} />
+            <input type="checkbox" onClick={(e) => handleCheck(3)} />
+            <input name="ans4" placeholder="ans" onChange={(e) => handleAnswer(3, e.target.value)} />
           </div>
         </div>
-        <button className="bg-white">add</button>
+        <div style={{display:"flex", gap:"30px"}}>
+      <Link href="/">
+      <button className="bg-white h-[50px] w-[80px]">Home</button>
+      </Link>
+        <button className="bg-white w-[80px]">add</button>
+        </div>
       </div>
     </form>
   )

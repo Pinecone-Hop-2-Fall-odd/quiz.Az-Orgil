@@ -18,6 +18,7 @@ export default function Home() {
    const body = respose.data.data[0]
    setResponse(body);
   }
+  console.log(response)
   const check = ()=>{
 
   }
@@ -27,10 +28,10 @@ export default function Home() {
         <div style={{ backgroundImage: "url(too.jpeg)" }} className="h-screen w-screen flex justify-center items-center flex-col gap-[300px]" >
           <div className="h-auto w-auto text-9xl" style={{ border: "1px solid black" }} name="question" placeholder="q">{response.question}</div>
           <div className="gap-[40px] flex flex-col flex-wrap h-[300px]">
-            <button className="h-auto w-auto text-9xl" name="ans1" placeholder="ans" onChange={check}>{response.ans1}</button>
-            <button className="h-auto w-auto text-9xl" name="ans2" placeholder="ans" onChange={check}>{response.ans2}</button>
-            <button className="h-auto w-auto text-9xl" name="ans3" placeholder="ans" onChange={check}>{response.ans3}</button>
-            <button className="h-auto w-auto text-9xl" name="ans4" placeholder="ans" onChange={check}>{response.ans4}</button>
+            <button className="h-auto w-auto text-9xl" name="ans1" placeholder="ans" onChange={check}>{response.answers[0].answer}</button>
+            <button className="h-auto w-auto text-9xl" name="ans2" placeholder="ans" onChange={check}>{response.answers[1].answer}</button>
+            <button className="h-auto w-auto text-9xl" name="ans3" placeholder="ans" onChange={check}>{response.answers[2].answer}</button>
+            <button className="h-auto w-auto text-9xl" name="ans4" placeholder="ans" onChange={check}>{response.answers[3].answer}</button>
           </div>
           <button className="bg-white" onClick={get}>add</button>
         </div>

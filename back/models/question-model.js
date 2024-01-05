@@ -3,7 +3,7 @@ const questionSchema = new mongoose.Schema({
     question: String,
     answers: [
         {
-            ans: String,
+            answer: {type : String , required : true},
             isCorrect: Boolean
         },
     ]
