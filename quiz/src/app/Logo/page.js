@@ -6,34 +6,41 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [response, setResponse] = useState("")
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if(!token) {
+    if (!token) {
       router.push('/login')
+    } else {
+      const get = async () => {
+        const response = await axios.get(`http://localhost:8080/question`)
+        setResponse(response.data.data[0]);
+      }
+      get()
     }
   }, [])
-  const [response,setResponse]=useState("")
-  const get = async () => {
-   const respose =  await axios.get(`http://localhost:8080/question`)
-   const body = respose.data.data[0]
-   setResponse(body);
+
+  const check = (i) => {
+    if (response.answers[i].isCorrect === true) {
+      alert("Correct answer")
+    } else {
+      alert("Wrong answer")
+    }
   }
   console.log(response)
-  const check = ()=>{
-
-  }
   return (
     <div className="h-screen w-screen flex justify-center items-center" style={{ backgroundImage: "url(too.jpeg)" }}>
       <div>
         <div style={{ backgroundImage: "url(too.jpeg)" }} className="h-screen w-screen flex justify-center items-center flex-col gap-[300px]" >
-          <div className="h-auto w-auto text-9xl" style={{ border: "1px solid black" }} name="question" placeholder="q">{response.question}</div>
+          <div className="h-auto w-auto text-9xl bg-white" style={{ border: "1px solid black" }} name="question" placeholder="q">{response.question}</div>
           <div className="gap-[40px] flex flex-col flex-wrap h-[300px]">
-            <button className="h-auto w-auto text-9xl" name="ans1" placeholder="ans" onChange={check}>{response.answers[0].answer}</button>
-            <button className="h-auto w-auto text-9xl" name="ans2" placeholder="ans" onChange={check}>{response.answers[1].answer}</button>
-            <button className="h-auto w-auto text-9xl" name="ans3" placeholder="ans" onChange={check}>{response.answers[2].answer}</button>
-            <button className="h-auto w-auto text-9xl" name="ans4" placeholder="ans" onChange={check}>{response.answers[3].answer}</button>
+            {response?.answers?.map((answer, index) => {
+              return (
+                <button className="h-auto w-auto text-9xl" name="ans1" placeholder="ans" onClick={() => check(index)}>{answer.answer}</button>
+
+              )
+            })}
           </div>
-          <button className="bg-white" onClick={get}>add</button>
         </div>
       </div>
     </div>
